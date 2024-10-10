@@ -5,7 +5,7 @@ import pandas as pd
 
 class Portfolio:
 
-    def __init__(self, file_path="my_portfolio.csv"):
+    def __init__(self, file_path="cold-email-generation-tool/app/resource/my_portfolio.csv"):
         self.file_path = file_path
         self.data = pd.read_csv(file_path)
         self.chroma_client = chromadb.PersistentClient('vectorstore')
