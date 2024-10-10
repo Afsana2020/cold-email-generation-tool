@@ -52,7 +52,6 @@ def create_streamlit_app(llm, portfolio, clean_text):
                                help="Please enter a valid URL", 
                                label_visibility="collapsed")
     
-    st.markdown(f'<div class="custom-input">{url_input}</div>', unsafe_allow_html=True)
     submit_button = st.button("Submit")
 
     if submit_button:
