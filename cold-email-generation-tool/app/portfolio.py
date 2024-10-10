@@ -5,10 +5,7 @@ import pandas as pd
 
 class Portfolio:
 
-    def __init__(self, file_path="app/resource/my_portfolio.csv"):
-        if not os.path.isabs(file_path):  # Check if the provided path is not absolute
-            current_directory = os.path.dirname(__file__)
-            file_path = os.path.join(current_directory, file_path)
+    def __init__(self, file_path="my_portfolio.csv"):
         self.file_path = file_path
         self.data = pd.read_csv(file_path)
         self.chroma_client = chromadb.PersistentClient('vectorstore')
