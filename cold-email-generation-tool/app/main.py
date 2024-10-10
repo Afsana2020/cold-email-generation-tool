@@ -17,8 +17,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
         <div style="background-color:#f0f8ff;padding:15px;border-radius:10px;margin-bottom:20px;">
             <h2 style="text-align:center;color:#4B6584;">Welcome!</h2>
             <p style="text-align:center;color:#2C3A47;font-size:16px;">
-                This AI-powered tool helps you craft personalized cold emails for job listings or client outreach. 
-                Just enter a job link and we’ll generate custom emails in seconds!
+                This AI-powered tool uses A.H. Tech's portfolio data to craft personalized cold emails for job listings or client outreach.
             </p>
             <ul style="color:#2C3A47;text-align:center;font-size:16px;">
                 <li>🔗 Enter a job listing URL</li>
@@ -34,7 +33,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
         unsafe_allow_html=True
     )
 
-    #url_input = st.text_input("Enter a URL below:", value="")
+    st.subheader("Enter URL below:")
     st.markdown(
     """
     <style>
