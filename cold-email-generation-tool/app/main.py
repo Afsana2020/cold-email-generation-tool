@@ -78,17 +78,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
                 
                 flag=1
             if flag==0: st.error("Seems like It's not a job post, Try again!")
-            else:
-                progress_bar.progress(100)
-                st.markdown(
-                    """
-                    <div style="background-color:#f0f2f6;padding:10px;border-radius:10px;text-align:center;">
-                        <h4>🎉 Great! Want more emails?</h4>
-                        <p>Click the <strong>'Submit'</strong> button again to generate more emails!</p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+            else: progress_bar.progress(100)
         except Exception as e:
             st.error(f"An Error Occurred: {e}")
 
