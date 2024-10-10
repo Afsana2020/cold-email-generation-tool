@@ -2,7 +2,6 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3']= sys.modules.pop('pysqlite3')
 
-import random
 import time
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader
@@ -53,22 +52,14 @@ def create_streamlit_app(llm, portfolio, clean_text):
 
             progress_bar.progress(60)
 
-            if len(jobs) > 3:
-                random_jobs = random.sample(jobs, 3)
-            else:
-                random_jobs = jobs
-
-            email_labels = ["Generated Mail-01", "Generated Mail-02", "Generated Mail-03"]
             flag=0
-            for idx,job in enumerate(random_jobs):
+            for job in jobs:
                 skills = job.get('skills', [])
                 links = portfolio.query_links(skills)
                 email = llm.write_mail(job, links)
-                st.subheader(email_labels[idx])
+                st.subheader("Generated Mail:")
                 st.code(email, language='markdown')
-
-                progress_bar.progress(60 + int((idx + 1) * 40 / len(random_jobs)))  # Progress up to 100%
-
+                
                 flag=1
             if flag==0: st.error("Seems like It's not a job post, Try again!")
             else:
