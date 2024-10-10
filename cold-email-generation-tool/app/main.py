@@ -21,7 +21,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
             </p>
             <ul style="color:#2C3A47;text-align:center;font-size:16px;">
                 <li>🔗 Enter a job listing URL</li>
-                <li>📧 Click <strong>'Submit'</strong> to generate up to 3 emails at once</li>
+                <li>📧 Click <strong>'Submit'</strong> to generate</li>
                 <li>💼 Emails are tailored to the job's skills and requirements</li>
             </ul>
             <p style="text-align:center;color:#4B6584;font-size:16px;">
