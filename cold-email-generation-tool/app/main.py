@@ -34,7 +34,25 @@ def create_streamlit_app(llm, portfolio, clean_text):
         unsafe_allow_html=True
     )
 
-    url_input = st.text_input("Enter a URL below:", value="")
+    #url_input = st.text_input("Enter a URL below:", value="")
+    st.markdown(
+    """
+    <style>
+    .custom-input {
+        border: 2px solid #FF5733;  
+        border-radius: 5px;  
+        padding: 10px;  
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+    
+    url_input = st.text_input("Enter a URL below:", value="", key="url_input", placeholder="https://example.com", 
+                               help="Please enter a valid URL", 
+                               label_visibility="collapsed")
+    
+    st.markdown(f'<div class="custom-input">{url_input}</div>', unsafe_allow_html=True)
     submit_button = st.button("Submit")
 
     if submit_button:
