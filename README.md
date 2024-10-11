@@ -33,11 +33,9 @@ Link: https://cold-email-generation-tool.streamlit.app/
 
 
 ## Tool Used:
-
-
-- Python: The core programming language used to develop the tool, ensuring flexibility and ease of integration with other libraries.
+- Python: The core programming language used to develop the tool, handling data processing, model integration, and overall logic development.
 - Llama LLM: For generating and processing personalized email content using advanced language models.
-- ChromaDB: As a vector database to efficiently store and retrieve embeddings for relevant job listings or client data.
+- ChromaDB: A vector database that efficiently stores and retrieves data embeddings from job listings or portfolios and ensures the email content is contextually relevant.
 - LangChain: To build the application's logic and workflow by combining LLMs with other tools like databases and APIs.
 - Streamlit: For creating an interactive, user-friendly web interface to easily input job URLs and generate cold emails.
 
