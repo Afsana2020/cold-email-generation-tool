@@ -1,9 +1,12 @@
+import streamlit as st
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from dotenv import load_dotenv
-import streamlit as st
+
+# Set the page config first
+st.set_page_config(layout="wide", page_title="Cold Email Generator")
 
 load_dotenv()
 
@@ -77,4 +80,7 @@ class Chain:
         return res.content
 
 if __name__ == "__main__":
-    print(st.secrets["GROQ_API_KEY"])  # Debugging step to check API key
+    chain = Chain()
+    portfolio = Portfolio()
+    st.set_page_config(layout="wide", page_title="Cold Email Generator")  # Ensure this is at the top
+    create_streamlit_app(chain, portfolio, clean_text)  # Assuming this function exists
