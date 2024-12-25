@@ -5,10 +5,7 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from dotenv import load_dotenv
 
-# Set the page config first thing, before any other Streamlit commands
-st.set_page_config(layout="wide", page_title="Cold Email Generator")
-
-# Now load environment variables
+# Load environment variables
 load_dotenv()
 
 class Chain:
@@ -81,7 +78,7 @@ class Chain:
         return res.content
 
 if __name__ == "__main__":
-    # Ensure that `st.set_page_config()` is only called once and is the first command
+    # No need for st.set_page_config()
     chain = Chain()
     portfolio = Portfolio()  # Ensure Portfolio is defined elsewhere
     # Note: create_streamlit_app should be defined if you are using it
