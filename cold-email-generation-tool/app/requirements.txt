@@ -25,3 +25,4 @@ python-json-logger==2.0.7
 streamlit==1.39.0
 selenium==4.25.0
 unstructured==0.15.13
+httpx==0.27.2
