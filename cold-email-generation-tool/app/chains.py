@@ -1,35 +1,18 @@
-import streamlit as st
+#chains:
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from dotenv import load_dotenv
+import streamlit as st
 
-# Ensure set_page_config is called first
-st.set_page_config(layout="wide", page_title="Cold Email Generator")
-
-# Load environment variables
 load_dotenv()
 
 class Chain:
     def __init__(self):
-        try:
-            # Initialize ChatGroq without passing proxies
-            self.llm = ChatGroq(
-                model_name="llama-3.1-70b-versatile",
-                temperature=0,
-                groq_api_key=st.secrets["GROQ_API_KEY"]
-            )
-        except TypeError as e:
-            # Handle errors and print the message to diagnose
-            st.error(f"Error initializing ChatGroq: {str(e)}")
-            self.llm = None
+           self.llm= ChatGroq(model_name="llama-3.1-70b-versatile",temperature=0,groq_api_key=st.secrets["GROQ_API_KEY"])
 
     def extract_jobs(self, cleaned_text):
-        if not self.llm:
-            st.error("LLM is not initialized. Cannot extract jobs.")
-            return []
-
         prompt_extract = PromptTemplate.from_template(
             """
                 ### SCRAPED TEXT FROM WEBSITE:
@@ -40,7 +23,7 @@ class Chain:
                 following keys: `role`, `experience`, `skills` and `description`.
                 Only return the valid JSON.
                 ### VALID JSON (NO PREAMBLE):    
-            """
+                """
         )
 
         chain_extract = prompt_extract | self.llm
@@ -50,13 +33,10 @@ class Chain:
             res = json_parser.parse(res.content)
         except OutputParserException:
             raise OutputParserException("Context too big, Unable to parse jobs")
-        return res if isinstance(res, list) else [res]
+        return res if isinstance(res,list) else [res]
 
-    def write_mail(self, job, links):
-        if not self.llm:
-            st.error("LLM is not initialized. Cannot generate email.")
-            return ""
 
+    def write_mail(self,job,links):
         prompt_email = PromptTemplate.from_template(
             """
             ### JOB DESCRIPTION:
@@ -81,8 +61,6 @@ class Chain:
         res = chain_email.invoke({"job_description": str(job), "link_list": links})
         return res.content
 
+
 if __name__ == "__main__":
-    # Print the API key for debugging (remove or mask for production)
     print(st.secrets["GROQ_API_KEY"])
-    # Initialize the Chain class
-    chain = Chain()
