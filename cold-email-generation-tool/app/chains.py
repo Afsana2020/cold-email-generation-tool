@@ -1,5 +1,5 @@
+chains:
 from langchain_groq import ChatGroq
-from groq._client import Client as GroqClient
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
@@ -34,7 +34,6 @@ class Chain:
         except UniqueConstraintError as e:
             st.error("Duplicate entry in database. Adjust input and retry.")
             print(f"Database error: {e}")
-
 
     def extract_jobs(self, cleaned_text):
         prompt_extract = PromptTemplate.from_template(
