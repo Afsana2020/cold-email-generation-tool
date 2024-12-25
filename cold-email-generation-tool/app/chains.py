@@ -10,8 +10,8 @@ load_dotenv()
 
 class Chain:
     def __init__(self):
-          try:
-            # Attempt to initialize the client
+        try:
+        # Attempt to initialize the client
             client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
         except TypeError as e:
             if "proxies" in str(e):
