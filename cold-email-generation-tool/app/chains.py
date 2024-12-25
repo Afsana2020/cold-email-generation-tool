@@ -1,4 +1,5 @@
 from langchain_groq import ChatGroq
+from groq._client import Client as GroqClient
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
@@ -9,7 +10,15 @@ load_dotenv()
 
 class Chain:
     def __init__(self):
-           self.llm= ChatGroq(model_name="llama-3.1-70b-versatile",temperature=0,groq_api_key=st.secrets["GROQ_API_KEY"])
+           # Initialize Groq client without `proxies` if necessary
+        client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
+        self.llm = ChatGroq(
+            model_name="llama-3.1-70b-versatile",
+            temperature=0,
+            groq_api_key=st.secrets["GROQ_API_KEY"],
+            client=client  # Pass the manually created client
+        )
+
 
     def extract_jobs(self, cleaned_text):
         prompt_extract = PromptTemplate.from_template(
