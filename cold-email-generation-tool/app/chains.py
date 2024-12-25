@@ -1,9 +1,12 @@
+import streamlit as st
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from dotenv import load_dotenv
-import streamlit as st
+
+# Ensure set_page_config is called first
+st.set_page_config(layout="wide", page_title="Cold Email Generator")
 
 # Load environment variables
 load_dotenv()
