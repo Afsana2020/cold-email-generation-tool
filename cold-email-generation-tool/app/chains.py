@@ -10,21 +10,24 @@ load_dotenv()
 
 class Chain:
     def __init__(self):
-        
         try:
-            # Attempt to initialize the client
+            # Minimal initialization of the client
             client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
-        except TypeError as e:
-            # Log the error and raise it, since proxies are not a valid argument
-            st.error(f"Error initializing GroqClient: {e}")
-            raise e
+        except Exception as e:
+            st.error(f"GroqClient initialization failed: {e}")
+            client = None  # Or implement alternative logic if possible
     
-        self.llm = ChatGroq(
-            model_name="llama-3.1-70b-versatile",
-            temperature=0,
-            groq_api_key=st.secrets["GROQ_API_KEY"],
-            client=client
-        )
+        # Proceed with client if initialized successfully
+        if client:
+            self.llm = ChatGroq(
+                model_name="llama-3.1-70b-versatile",
+                temperature=0,
+                groq_api_key=st.secrets["GROQ_API_KEY"],
+                client=client
+            )
+        else:
+            st.error("Unable to initialize ChatGroq due to client issues.")
+
 
 
 
