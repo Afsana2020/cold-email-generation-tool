@@ -10,33 +10,30 @@ load_dotenv()
 
 class Chain:
    def __init__(self):
-        try:
-            # Attempt GroqClient initialization
-            client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
-        except Exception as e:
-            st.error(f"GroqClient initialization failed: {e}")
-            client = None  # Handle client failure
+      try:
+      # Attempt GroqClient initialization
+         client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
+      except Exception as e:
+         st.error(f"GroqClient initialization failed: {e}")
+         client = None  # Handle client failure
     
-        if client:
-            self.llm = ChatGroq(
-                model_name="llama-3.1-70b-versatile",
-                temperature=0,
-                groq_api_key=st.secrets["GROQ_API_KEY"],
-                client=client
-            )
-        else:
-            st.error("Unable to initialize ChatGroq due to client issues.")
+      if client:
+         self.llm = ChatGroq(
+               model_name="llama-3.1-70b-versatile",
+               temperature=0,
+               groq_api_key=st.secrets["GROQ_API_KEY"],
+               client=client
+         )
+      else:
+         st.error("Unable to initialize ChatGroq due to client issues.")
     
         # Handle database uniqueness errors
-        try:
+      try:
             # Example database operation
-            db.insert(data)  # Replace with actual logic
-        except UniqueConstraintError as e:
-            st.error("Duplicate entry in database. Adjust input and retry.")
-            print(f"Database error: {e}")
-
-
-
+         db.insert(data)  # Replace with actual logic
+      except UniqueConstraintError as e:
+         st.error("Duplicate entry in database. Adjust input and retry.")
+         print(f"Database error: {e}")
 
 
     def extract_jobs(self, cleaned_text):
