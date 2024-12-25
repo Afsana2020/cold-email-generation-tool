@@ -10,14 +10,22 @@ load_dotenv()
 
 class Chain:
     def __init__(self):
-           # Initialize Groq client without `proxies` if necessary
-        client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
+          try:
+            # Attempt to initialize the client
+            client = GroqClient(api_key=st.secrets["GROQ_API_KEY"])
+        except TypeError as e:
+            if "proxies" in str(e):
+                # Handle the error by creating a minimal client
+                client = GroqClient(api_key=st.secrets["GROQ_API_KEY"], proxies=None)
+            else:
+                raise e
         self.llm = ChatGroq(
             model_name="llama-3.1-70b-versatile",
             temperature=0,
             groq_api_key=st.secrets["GROQ_API_KEY"],
-            client=client  # Pass the manually created client
+            client=client
         )
+
 
 
     def extract_jobs(self, cleaned_text):
