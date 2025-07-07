@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import streamlit as st
 
 load_dotenv()
-
+ChatGroq.model_rebuild()
 class Chain:
     def __init__(self):
            self.llm= ChatGroq(model_name="llama-3.1-70b-versatile",temperature=0,groq_api_key=st.secrets["GROQ_API_KEY"])
